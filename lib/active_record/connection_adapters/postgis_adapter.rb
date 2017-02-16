@@ -57,14 +57,6 @@ module ActiveRecord
         else
           @prepared_statements = false
         end
-
-
-        if self.class.type_cast_config_to_boolean(args[3].fetch(:prepared_statements) { true })
-          @prepared_statements = true
-          @visitor = ::Arel::Visitors::PostGIS.new(self)
-        else
-          @visitor = unprepared_visitor
-        end
       end
 
       def adapter_name
