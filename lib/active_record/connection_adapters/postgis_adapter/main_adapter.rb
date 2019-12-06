@@ -14,6 +14,11 @@ module ActiveRecord  # :nodoc:
           end
         end
 
+        def client_min_messages=(level)
+          level = 'notice' if level == 'panic'
+          execute("SET client_min_messages TO '#{level}'", 'SCHEMA')
+        end
+
         include PostGISAdapter::CommonAdapterMethods
 
         @@native_database_types = nil
